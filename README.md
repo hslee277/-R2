@@ -1,3 +1,4 @@
+```mermaid
 flowchart TB
 
 %% ---------- Nodes (topics you gave)
