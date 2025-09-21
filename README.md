@@ -1,17 +1,17 @@
 ```mermaid
 flowchart TB
 
-%% ===== Backbone (signal flow spine) =====
-sp1[Source];
-sp2[Coding];
-sp3[Modulation];
-sp4[Sync];
-sp5[RF Frontend];
-sp6[Antenna];
-sp7[Channel];
-sp8[Receiver];
-sp9[Quality];
-sp10[Operations];
+%% ===== 뼈대(신호 흐름 Spine) =====
+sp1[원천(소스)];
+sp2[코딩];
+sp3[변조];
+sp4[동기];
+sp5[RF 프런트엔드];
+sp6[안테나];
+sp7[채널];
+sp8[수신기];
+sp9[품질·측정];
+sp10[운용·계획];
 
 sp1 --> sp2;
 sp2 --> sp3;
@@ -23,35 +23,35 @@ sp7 --> sp8;
 sp8 --> sp9;
 sp9 --> sp10;
 
-%% ===== Topics anchored to the backbone =====
-fourier[Fourier Transform];
-awgn[AWGN kTB NF];
-cohbw[Coherence BW Bc];
-modfilt[Mod Demod Filter];
-mfdet[Matched Filter Decision];
-pulse[Pulse Shaping RC RRC FTN];
-fmcapt[FM Capture Pre Deemph];
-linecode[Line Coding NRZ RZ Manchester AMI];
-lbudget[Link Budget MDS SNR];
-txpower[TX Power FSPL Ant Gain];
-fresnel[Fresnel Zone];
-veldisp[Velocity Dispersion];
-iono[Ionosphere LUF MUF FOT];
-txline[Tx Line Impedance];
-match[Impedance Match Verify];
-distless[Distortionless R L G C];
-rxstruct[Receiver Arch RF Basics];
-pll[PLL];
-superhet[Double Superhet Rx Figures];
-rffilt[RF Filter Q BW Ripple];
-spectrum[Spectrum Analyzer];
-evm[EVM];
-imd3[IMD3];
+%% ===== 토픽(한글 라벨) =====
+fourier[푸리에 변환];
+awgn[AWGN (kTB, NF)];
+cohbw[상관대역폭(Bc)];
+modfilt[변조·검파·필터링];
+mfdet[정합필터링 & 데이터 판정];
+pulse[펄스 성형(RC/RRC) & FTN];
+fmcapt[FM 포획효과 & Pre/De-emph];
+linecode[라인코딩(NRZ/RZ/맨체스터/AMI)];
+lbudget[링크버짓(MDS, SNR, kTB, NF)];
+txpower[송신전력(FSPL, 안테나 이득)];
+fresnel[프레넬 존];
+veldisp[전파 속도·분산과 대책];
+iono[전리층 특성주파수(LUF/MUF/FOT)];
+txline[전송선로·임피던스];
+match[임피던스 정합과 확인];
+distless[무왜곡 전송 조건(R/L=G/C)];
+rxstruct[수신기 구조·RF 기초];
+pll[PLL(구성과 원리)];
+superhet[더블 슈퍼헤테로다인 & 수신기 4대 특성];
+rffilt[RF 필터(Q, BW, Ripple)];
+spectrum[스펙트럼 분석기(원리·설정)];
+evm[EVM(오차벡터 크기)];
+imd3[IMD(3차)];
 dpcm[DPCM];
-psk8[8 PSK Design];
-eloran[e Loran];
+psk8[8-PSK 설계];
+eloran[e-Loran];
 
-%% anchor to spine
+%% ===== 뼈대에 앵커링 =====
 sp1 --- linecode;
 sp1 --- dpcm;
 sp1 --- fourier;
@@ -86,28 +86,38 @@ sp9 --- spectrum;
 sp10 --- lbudget;
 sp10 --- txpower;
 
-%% ===== Cross-relations among topics (key links) =====
+%% ===== 핵심 상호 연관 =====
 fourier --> pulse;
 fourier --> rffilt;
+
 awgn --> evm;
 awgn --> lbudget;
+
 cohbw --> mfdet;
+veldisp --> cohbw;
+
 pulse --> mfdet;
 linecode --> pll;
+
 psk8 --> modfilt;
 modfilt --> mfdet;
 mfdet --> evm;
+
 fmcapt --> evm;
+
 txline --> match;
 match --> evm;
 distless --> txline;
+
 superhet --> evm;
 rffilt --> spectrum;
+
 imd3 --> spectrum;
 imd3 --> evm;
+
 txpower --> lbudget;
 fresnel --> lbudget;
 iono --> lbudget;
-veldisp --> cohbw;
+
 eloran --> pll;
 eloran --> lbudget;
