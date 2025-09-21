@@ -1,42 +1,6 @@
 ```mermaid
 flowchart TB
 
-%% ---------- Nodes (topics you gave)
-fourier["Fourier Transform"];
-awgn["AWGN (kTB, NF)"];
-coh_bw["Coherence BW (Bc)"];
-mod_filt["Mod/Demod & Filtering"];
-mf_detect["Matched Filter & Decision"];
-pulse["Pulse Shaping (RC/RRC) & FTN"];
-fm_capture["FM Capture & Pre/De-emph"];
-linecode["Line Coding (NRZ/RZ/Manchester/AMI)"];
-linkbudget["Link Budget (MDS, SNR, kTB, NF)"];
-txpower["TX Power (FSPL, Ant Gain)"];
-fresnel["Fresnel Zone"];
-vel_disp["Velocity/Dispersion & Mitigation"];
-ionosphere["Ionosphere (LUF/MUF/FOT)"];
-txline["Tx Line & Impedance"];
-match["Impedance Match & Verification"];
-distless["Distortionless Condition (R/L = G/C)"];
-rx_struct["Receiver Structure & RF Basics"];
-pll["PLL (Arch & Principle)"];
-superhet["Double Superhet & 4 Rx Figures"];
-rffilter["RF Filter (Q, BW, Ripple)"];
-spectrum["Spectrum Analyzer & Settings"];
-evm["EVM"];
-imd3["IMD (3rd)"];
-dpcm["DPCM"];
-psk8["8-PSK Design"];
-eloran["e-Loran"];
-
-%% ---------- Related nodes (added to enrich relationships)
-ber["BER"];
-ebn0["Eb/N0"];
-isi["ISI"];
-equalizer["Equalizer (ZF/MMSE/DFE)"];
-diversity["Diversity (MRC/SC)"];
-mimo["MIMO / Beamforming"];flowchart TB
-
 %% ===== Backbone (signal flow spine) =====
 sp1[Source];
 sp2[Coding];
@@ -147,4 +111,3 @@ iono --> lbudget;
 veldisp --> cohbw;
 eloran --> pll;
 eloran --> lbudget;
-
